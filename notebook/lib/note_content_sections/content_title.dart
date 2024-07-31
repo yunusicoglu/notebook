@@ -33,42 +33,42 @@ class _ContentTitleState extends State<ContentTitle> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: _isEditing
-          ? TextField(
-            controller: _controller,
-            focusNode: _focusNode,
-            onSubmitted: (value) {
-              setState(() {
-                _isEditing = false;
-              });
-            },
-            style: const TextStyle(
-              fontSize: 24, 
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1,
+            ? TextField(
+              controller: _controller,
+              focusNode: _focusNode,
+              onSubmitted: (value) {
+                setState(() {
+                  _isEditing = false;
+                });
+              },
+              style: const TextStyle(
+                fontSize: 24, 
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1,
+              ),
+              decoration: const InputDecoration(
+                border: InputBorder.none
+              ),
+            )
+            : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 7),
+              child: Text(
+                _controller.text.isNotEmpty ? _controller.text : 'Başlık',
+                
+                style: _controller.text.isNotEmpty
+                ? const TextStyle(
+                    fontSize: 24, 
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                  )
+                : const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                    color: Colors.black45
+                  )
+              ),
             ),
-            decoration: const InputDecoration(
-              border: InputBorder.none
-            ),
-          )
-          : Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 7),
-            child: Text(
-              _controller.text.isNotEmpty ? _controller.text : 'Başlık',
-              
-              style: _controller.text.isNotEmpty
-              ? const TextStyle(
-                  fontSize: 24, 
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                )
-              : const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                  color: Colors.black45
-                )
-            ),
-          ),
         ),
       ),
     );
