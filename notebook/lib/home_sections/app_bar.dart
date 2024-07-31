@@ -14,7 +14,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         children: [
           const Text(
             'Notlarım',
-            style: TextStyle(fontSize: 35),),
+            style: TextStyle(fontSize: 35),
+          ),
           const SizedBox(width: 15),
           Image.asset(
             'assets/icons/note_icon.png',
@@ -25,8 +26,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: 80,
     );
   }
-  
+
   @override
   Size get preferredSize => const Size.fromHeight(80.0);
 }
-
