@@ -24,7 +24,6 @@ class HomeScreen extends StatelessWidget {
             NoteCover(),
             SizedBox(height: 30),
             NoteCover(),
-
           ],
         )
       )

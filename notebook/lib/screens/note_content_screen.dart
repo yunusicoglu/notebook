@@ -18,10 +18,7 @@ class _NoteContentState extends State<NoteContentScreen> {
     return const Scaffold(
       body: Column(
         children: <Widget>[
-          Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [ContentTopSection()]
-          ),
+          ContentTopSection(),
           SizedBox(height: 10),
           ContentTitle()
         ],
