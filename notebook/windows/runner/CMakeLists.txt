@@ -1,3 +1,7 @@
+#alt satırı ben ekledim
+set(CMAKE_BUILD_TYPE Debug)
+
+
 cmake_minimum_required(VERSION 3.14)
 project(runner LANGUAGES CXX)
 
@@ -35,6 +39,9 @@ target_compile_definitions(${BINARY_NAME} PRIVATE "NOMINMAX")
 target_link_libraries(${BINARY_NAME} PRIVATE flutter flutter_wrapper_app)
 target_link_libraries(${BINARY_NAME} PRIVATE "dwmapi.lib")
 target_include_directories(${BINARY_NAME} PRIVATE "${CMAKE_SOURCE_DIR}")
+#alt satırı ben ekledim, derleme sirasinda pdb dosyalarının olusturulmasini saglar
+target_link_options(${BINARY_NAME} PUBLIC /DEBUG:FULL)
+
 
 # Run the Flutter tool portions of the build. This must not be removed.
 add_dependencies(${BINARY_NAME} flutter_assemble)

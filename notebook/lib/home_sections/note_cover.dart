@@ -11,18 +11,9 @@ class NoteCover extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 80,
-      // decoration: BoxDecoration(
-      //   color: Colors.blueGrey[50]
-      // ),
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context, 
-            MaterialPageRoute(
-              builder: (context) => const NoteContentScreen()
-            ));
-        },
+        onTap: () => goToNoteContentScreen(context),
         borderRadius: BorderRadius.circular(10),
         splashColor: Colors.transparent,
         highlightColor: const Color.fromARGB(54, 0, 0, 0),
@@ -55,5 +46,16 @@ class NoteCover extends StatelessWidget {
         ),
       ),
     );
+  }
+
+
+
+  //The method that works when the note cover is clicked
+  void goToNoteContentScreen(BuildContext context) {
+    Navigator.push(
+      context, 
+      MaterialPageRoute(
+        builder: (context) => const NoteContentScreen()
+      ));
   }
 }

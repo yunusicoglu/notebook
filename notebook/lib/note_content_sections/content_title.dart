@@ -51,7 +51,7 @@ class _ContentTitleState extends State<ContentTitle> {
               ),
             )
             : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 7),
+              padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 9),
               child: Text(
                 _controller.text.isNotEmpty ? _controller.text : 'Başlık',
                 
