@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:notebook/note_content_sections/content_title.dart';
 import 'package:notebook/note_content_sections/content_top_section.dart';
