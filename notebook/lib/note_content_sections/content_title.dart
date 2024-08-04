@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ContentTitle extends StatefulWidget {
-  const ContentTitle({super.key});
+  final void Function(String) updateTitle;
+  const ContentTitle({super.key, required this.updateTitle});
 
   @override
   State<ContentTitle> createState() => _ContentTitleState();
 }
 
 class _ContentTitleState extends State<ContentTitle> {
-    final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   bool _isEditing = false;
   final FocusNode _focusNode = FocusNode();
 
@@ -40,6 +41,9 @@ class _ContentTitleState extends State<ContentTitle> {
                 setState(() {
                   _isEditing = false;
                 });
+              },
+              onChanged: (title) {
+                widget.updateTitle(title);
               },
               style: const TextStyle(
                 fontSize: 24, 

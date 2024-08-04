@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ContentTopSection extends StatelessWidget {
+  final void Function() saveAndExit;
+  
   const ContentTopSection({
-    super.key,
+    super.key, required this.saveAndExit, 
   });
 
   @override
@@ -14,7 +16,7 @@ class ContentTopSection extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
           child: InkWell(
             borderRadius: BorderRadius.circular(10),
-            onTap: () => Navigator.pop(context),
+            onTap: saveAndExit,
             splashColor: Colors.black12,
             child: Container(
               decoration: BoxDecoration(
