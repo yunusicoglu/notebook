@@ -1,0 +1,6 @@
+# Satır sonu karakterlerini LF olarak ayarla
+* text=auto eol=lf
+
+# Belirli dosya türleri için CRLF kullan
+*.bat text eol=crlf
+*.cmd text eol=crlf

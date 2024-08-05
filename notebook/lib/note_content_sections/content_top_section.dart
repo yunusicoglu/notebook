@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ContentTopSection extends StatelessWidget {
+  final void Function() saveAndExit;
   const ContentTopSection({
-    super.key,
+    super.key, required this.saveAndExit 
   });
 
   @override
@@ -14,7 +15,7 @@ class ContentTopSection extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
           child: InkWell(
             borderRadius: BorderRadius.circular(10),
-            onTap: () => Navigator.pop(context),
+            onTap: () => saveAndExit(),
             splashColor: Colors.black12,
             child: Container(
               decoration: BoxDecoration(
@@ -22,7 +23,13 @@ class ContentTopSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10)
               ),
               padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 18),
-              child: const Icon(Icons.keyboard_backspace)
+              child: const Row(
+                children: <Widget>[
+                  Icon(Icons.keyboard_backspace),
+                  SizedBox(width: 10,),
+                  Text('Kaydet ve Çık'),
+                ],
+              )
             ),
           ),
         ),

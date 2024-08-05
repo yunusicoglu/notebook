@@ -1,16 +1,41 @@
 import 'package:flutter/material.dart';
 
 class ContentTitle extends StatefulWidget {
-  const ContentTitle({super.key});
+  final void Function(String) updateTitle;
+  final String? title;
+  const ContentTitle({
+    super.key,
+    required this.updateTitle,
+    required this.title
+    });
 
   @override
   State<ContentTitle> createState() => _ContentTitleState();
 }
 
 class _ContentTitleState extends State<ContentTitle> {
-    final TextEditingController _controller = TextEditingController();
+  late TextEditingController _controller;
   bool _isEditing = false;
   final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState(){
+    super.initState();
+    //degiskeni tanimlarken hata vermemesi icin eklendi
+    _controller = TextEditingController(text: widget.title);       
+  }
+
+  //widgetta degisim oldu mu kontrolu
+  // @override
+  // void didUpdateWidget(ContentTitle oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+  //   if (widget.title != oldWidget.title) {
+  //     print('baslik yenilendi');
+  //     setState(() {
+  //       _controller = TextEditingController(text: widget.title);       
+  //     });
+  //   }
+  // }
 
   @override
   void dispose() {
@@ -40,6 +65,9 @@ class _ContentTitleState extends State<ContentTitle> {
                 setState(() {
                   _isEditing = false;
                 });
+              },
+              onChanged: (title) {
+                widget.updateTitle(title);
               },
               style: const TextStyle(
                 fontSize: 24, 
