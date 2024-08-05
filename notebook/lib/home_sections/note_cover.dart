@@ -46,7 +46,7 @@ class NoteCover extends StatelessWidget {
               ),
               const SizedBox(width: 10,),
               Text(
-                noteTitle.isNotEmpty ? noteTitle : '(basliksiz)',
+                noteTitle.isNotEmpty ? noteTitle : '(Başlıksız)',
                 style: const TextStyle(
                   fontSize: 25,
                 ),

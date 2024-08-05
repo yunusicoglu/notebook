@@ -29,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
     
-  //Note Content Screen'den geri gelindiğinde son görüntülenen notun bilgileri alınır ve liste değişkeni güncellenir
+  //Not listesinin state'ini günceller 
+  //Note Content Screen'den geri gelindiğinde son görüntülenen notun bilgileri alınır ve liste güncellenir
   void _updateNotes(String id, String title, String content){
     setState(() {
       for (var note in _notes) {
@@ -41,11 +42,21 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _addNote(String id, String title, String content){
+    setState(() {
+      _notes.add({
+        'id': id,
+        'title': title,
+        'content': content,
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey[50],
-      appBar: const AppBarWidget(),
+      appBar: AppBarWidget(addNote: _addNote),
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
@@ -64,19 +75,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }).toList(),
                 )
-              : const Text('Not yok.')
+              : const Column(
+                children: <Widget>[
+                  SizedBox(height: 300,),
+                  Text('Not yok', style: TextStyle(fontSize: 23),),
+                ] 
+              )
           ],
         ),
       )
     );
   }
 }
-
-
-
-                // const Divider(thickness: 1,),
-                // const SizedBox(height: 30),
-                // Column(
-                //   children: <Widget>[
-                //     NoteCover(noteId: note['id'], noteTitle: note['title'], noteContent: note['content'],),
-                //     const SizedBox(height: 30),

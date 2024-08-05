@@ -7,18 +7,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class FirebaseServices {
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
-  Future<void> addNote(String title, String content) async {
+  Future<Map<String, dynamic>?> addNote() async {
     CollectionReference notesCollection = db.collection('notes');
 
     try {
-      await notesCollection.add({
-        'title': title,
-        'content': content,
+      DocumentReference docRef = await notesCollection.add({
+        'title': '',
+        'content': '',
         'created_at': FieldValue.serverTimestamp(),
       });
       print('Not bilgileri basariyla eklendi.');
+      // return docRef.id;
+      return {
+        'id': docRef.id,
+        'title': '',
+        'content': ''
+      };
     } catch (e) {
       print('Not eklenirken hata olustu: $e');
+      return null;
     }
   }
 
