@@ -21,21 +21,10 @@ class _ContentTitleState extends State<ContentTitle> {
   @override
   void initState(){
     super.initState();
-    //degiskeni tanimlarken hata vermemesi icin eklendi
+    //degiskenin default halini tanimlarken hata vermemesi icin burada yapildi
     _controller = TextEditingController(text: widget.title);       
   }
 
-  //widgetta degisim oldu mu kontrolu
-  // @override
-  // void didUpdateWidget(ContentTitle oldWidget) {
-  //   super.didUpdateWidget(oldWidget);
-  //   if (widget.title != oldWidget.title) {
-  //     print('baslik yenilendi');
-  //     setState(() {
-  //       _controller = TextEditingController(text: widget.title);       
-  //     });
-  //   }
-  // }
 
   @override
   void dispose() {

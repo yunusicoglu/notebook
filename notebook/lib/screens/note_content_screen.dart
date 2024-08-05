@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:notebook/note_content_sections/content_note_section.dart';
 import 'package:notebook/note_content_sections/content_title.dart';
 import 'package:notebook/note_content_sections/content_top_section.dart';
 import './../services/firebase_services.dart';
@@ -65,7 +66,8 @@ class _NoteContentState extends State<NoteContentScreen> {
         children: <Widget>[
           ContentTopSection(saveAndExit: saveAndExit),
           const SizedBox(height: 10),
-          ContentTitle(updateTitle: updateTitle, title: _title)
+          ContentTitle(updateTitle: updateTitle, title: _title),
+          ContentNoteSection(),
         ],
       ),
     );
