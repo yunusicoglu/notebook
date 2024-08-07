@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(
         shrinkWrap: true,
         children: <Widget>[
-          const SizedBox(height: 30),
+          const SizedBox(height: 10),
           _notes.isNotEmpty
             ? Column(
                 children: _notes.map((note){

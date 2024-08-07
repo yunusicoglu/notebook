@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 class ContentTopSection extends StatelessWidget {
-  final void Function() saveAndExit;
+  final void Function() exit;
   const ContentTopSection({
-    super.key, required this.saveAndExit 
+    super.key, required this.exit,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 40, 0, 0),
-          child: InkWell(
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20,40,20,0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
             borderRadius: BorderRadius.circular(10),
-            onTap: () => saveAndExit(),
+            onTap: exit,
             splashColor: Colors.black12,
             child: Container(
               decoration: BoxDecoration(
@@ -30,8 +30,8 @@ class ContentTopSection extends StatelessWidget {
               )
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
