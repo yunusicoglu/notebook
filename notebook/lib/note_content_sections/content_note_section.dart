@@ -3,107 +3,107 @@ import 'package:flutter/material.dart';
 class ContentNoteSection extends StatefulWidget {
   final void Function(String) updateContent;
   final String? content;
+  final bool isNoteContentEditing;
+  
   const ContentNoteSection(
-      {super.key, required this.updateContent, required this.content});
+      {super.key, required this.updateContent, required this.content, required this.isNoteContentEditing});
 
   @override
   State<ContentNoteSection> createState() => _ContentNoteSectionState();
 }
 
 class _ContentNoteSectionState extends State<ContentNoteSection> {
-  late TextEditingController _contentcontroller;
-  bool _isEditing = false;
+  late TextEditingController _controller;
+  bool isNoteContentEditing = false;
   final FocusNode _focusNode = FocusNode();
+
 
   @override
   void initState() {
     super.initState();
-    _contentcontroller = TextEditingController(text: widget.content);
+    _controller = TextEditingController(text: widget.content);       
   }
 
   @override
   void dispose() {
-    _contentcontroller.dispose();
-    _focusNode.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () {
         setState(() {
-          _isEditing = true;
+          isNoteContentEditing = true;
           _focusNode.requestFocus();
         });
       },
-      child: SizedBox(
-        width: double.infinity,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: _isEditing
-              ? FocusScope(
-                  child: Focus(
-                    onFocusChange: (hasFocus) {
-                      if (!hasFocus) {
-                        setState(() {
-                          _isEditing = false;
-                        });
-                      }
-                    },
-                    child: TextField(
-                      controller: _contentcontroller,
-                      focusNode: _focusNode,
-                      maxLines: null,
-                      expands: true,
-                      onTap: () {
-                        setState(() {
-                          _isEditing = true;
-                        });
-                      },
-                      onSubmitted: (value) {
-                        setState(() {
-                          _isEditing = false;
-                        });
-                      },
-                      onChanged: (content) {
-                        widget.updateContent(content);
-                      },
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Notunuzu girin',
-                      ),
-                      style: const TextStyle(
-                        fontSize: 18, 
-                        letterSpacing: 1,
-                        color: Colors.black87,
-
-                      ),
-                    ),
-                  ),
-                )
-              : Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 0, vertical: 9),
-                  child: Text(
-                    _contentcontroller.text.isNotEmpty
-                        ? _contentcontroller.text
-                        : 'Not içeriği',
-                    style: _contentcontroller.text.isNotEmpty
-                        ? const TextStyle(
-                            letterSpacing: 1, 
-                            fontSize: 18,
-                            color: Colors.black87,
-                          )
-                        : const TextStyle(
-                            letterSpacing: 1,
-                            fontSize: 18,
-                            color: Colors.black45,
-                          ),
-                  ),
+      child: ListView(
+        padding: EdgeInsets.zero,
+        shrinkWrap: true,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: isNoteContentEditing
+            ? SizedBox(
+              height: screenHeight * 0.47,
+              width: 100,
+              child: TextField(
+                controller: _controller,
+                focusNode: _focusNode,
+                onSubmitted: (value) {
+                  setState(() {
+                    isNoteContentEditing = false;
+                  });
+                },
+                maxLines: null,
+                minLines: 20,
+                onChanged: (content) {
+                  widget.updateContent(content);
+                },
+                style: const TextStyle(
+                  fontSize: 18, 
                 ),
-        ),
-      ),
+                decoration: const InputDecoration(
+                  border: InputBorder.none
+                ),
+              ),
+            )
+            : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 9),
+              child: Text(
+                  _controller.text.isNotEmpty ? _controller.text : 'Not Alanı',
+                  style: _controller.text.isNotEmpty
+                  ? const TextStyle(
+                      fontSize: 18, 
+                    )
+                  : const TextStyle(
+                      fontSize: 18,
+                      color: Colors.black45
+                  )
+                ),
+            ),
+          )
+        ],
+      )
+      // child: ListView(
+      //  shrinkWrap: true,
+      //   children: [
+      //     Padding(
+      //       padding: const EdgeInsets.symmetric(horizontal: 20),
+      //       child: Text(
+      //           'Bu birinci satır.\nBu ikinci satır.\nBu üçüncü satır.'
+      //         )
+      //     )
+      //   ],
+      // ),
+
+
+
+
     );
+  
   }
 }

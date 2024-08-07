@@ -60,8 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.blueGrey[50],
       appBar: AppBarWidget(addNote: _addNote),
       body: ListView(
+        shrinkWrap: true,
         children: <Widget>[
-          const Divider(thickness: 1,),
           const SizedBox(height: 30),
           _notes.isNotEmpty
             ? Column(

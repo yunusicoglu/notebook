@@ -12,6 +12,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.blueGrey[50],
+      surfaceTintColor: Colors.transparent,
+      scrolledUnderElevation: 0,
       titleSpacing: 32,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -23,10 +25,6 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 style: TextStyle(fontSize: 35),
               ),
               SizedBox(width: 15),
-              // Image.asset(
-              //   'assets/icons/note_icon.png',
-              //   height: 32,
-              // ),
             ],
           ),
           InkWell(
