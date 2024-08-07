@@ -73,6 +73,12 @@ class _ContentNoteSectionState extends State<ContentNoteSection> {
                         border: OutlineInputBorder(),
                         hintText: 'Notunuzu girin',
                       ),
+                      style: const TextStyle(
+                        fontSize: 18, 
+                        letterSpacing: 1,
+                        color: Colors.black87,
+
+                      ),
                     ),
                   ),
                 )
@@ -85,10 +91,12 @@ class _ContentNoteSectionState extends State<ContentNoteSection> {
                         : 'Not içeriği',
                     style: _contentcontroller.text.isNotEmpty
                         ? const TextStyle(
+                            letterSpacing: 1, 
                             fontSize: 18,
                             color: Colors.black87,
                           )
                         : const TextStyle(
+                            letterSpacing: 1,
                             fontSize: 18,
                             color: Colors.black45,
                           ),

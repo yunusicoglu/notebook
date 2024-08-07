@@ -59,7 +59,7 @@ class _ContentTitleState extends State<ContentTitle> {
                 widget.updateTitle(title);
               },
               style: const TextStyle(
-                fontSize: 24, 
+                fontSize: 26, 
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1,
               ),
@@ -74,12 +74,12 @@ class _ContentTitleState extends State<ContentTitle> {
                 
                 style: _controller.text.isNotEmpty
                 ? const TextStyle(
-                    fontSize: 24, 
+                    fontSize: 26, 
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1,
                   )
                 : const TextStyle(
-                    fontSize: 24,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1,
                     color: Colors.black45
