@@ -27,6 +27,8 @@ class NoteContentScreen extends StatefulWidget {
 class _NoteContentState extends State<NoteContentScreen> {
   String _title = '';
   String _content = '';
+  final bool _isNoteContentEditing = false;
+
 
   @override
   void initState() {
@@ -36,7 +38,7 @@ class _NoteContentState extends State<NoteContentScreen> {
   }
 
   void saveAndExit() async {
-    print('Not guncellendi, yeni baslik: $_title');
+ 
     Navigator.pop(context);
 
     FirebaseServices firebaseServices = FirebaseServices();
@@ -66,7 +68,7 @@ class _NoteContentState extends State<NoteContentScreen> {
           ContentTopSection(saveAndExit: saveAndExit),
           const SizedBox(height: 10),
           ContentTitle(updateTitle: updateTitle, title: _title),
-          ContentNoteSection(updateContent: updateContent, content: _content),
+          ContentNoteSection(updateContent: updateContent, content: _content, isNoteContentEditing: _isNoteContentEditing),
         ],
       ),
     );

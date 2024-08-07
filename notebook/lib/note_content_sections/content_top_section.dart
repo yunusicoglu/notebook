@@ -26,8 +26,6 @@ class ContentTopSection extends StatelessWidget {
               child: const Row(
                 children: <Widget>[
                   Icon(Icons.keyboard_backspace),
-                  SizedBox(width: 10,),
-                  Text('Kaydet ve Çık'),
                 ],
               )
             ),
