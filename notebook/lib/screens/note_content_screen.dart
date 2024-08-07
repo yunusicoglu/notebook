@@ -27,7 +27,6 @@ class NoteContentScreen extends StatefulWidget {
 class _NoteContentState extends State<NoteContentScreen> {
   String _title = '';
   String _content = '';
-  final bool _isNoteContentEditing = false;
 
 
   @override
@@ -37,8 +36,7 @@ class _NoteContentState extends State<NoteContentScreen> {
     _content = widget.noteContent;
   }
 
-  void saveAndExit() async {
- 
+  void _exit() async {
     Navigator.pop(context);
 
     FirebaseServices firebaseServices = FirebaseServices();
@@ -46,6 +44,7 @@ class _NoteContentState extends State<NoteContentScreen> {
 
     //Home Screen'deki not listesinin güncellenmesi için bu notun bilgilerini gönderiyorum.
     widget.updateNotes(widget.noteId, _title, _content);
+
   }
 
   void updateTitle(String title) {
@@ -65,10 +64,10 @@ class _NoteContentState extends State<NoteContentScreen> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          ContentTopSection(saveAndExit: saveAndExit),
+          ContentTopSection(exit: _exit,),
           const SizedBox(height: 10),
           ContentTitle(updateTitle: updateTitle, title: _title),
-          ContentNoteSection(updateContent: updateContent, content: _content, isNoteContentEditing: _isNoteContentEditing),
+          ContentNoteSection(updateContent: updateContent, content: _content,),
         ],
       ),
     );

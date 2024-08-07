@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 class ContentNoteSection extends StatefulWidget {
   final void Function(String) updateContent;
   final String? content;
-  final bool isNoteContentEditing;
-  
   const ContentNoteSection(
-      {super.key, required this.updateContent, required this.content, required this.isNoteContentEditing});
+      {super.key, required this.updateContent, required this.content, });
 
   @override
   State<ContentNoteSection> createState() => _ContentNoteSectionState();
@@ -14,16 +12,16 @@ class ContentNoteSection extends StatefulWidget {
 
 class _ContentNoteSectionState extends State<ContentNoteSection> {
   late TextEditingController _controller;
-  bool isNoteContentEditing = false;
+  late bool _isNoteContentEditing = false;
   final FocusNode _focusNode = FocusNode();
 
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: widget.content);       
+    _controller = TextEditingController(text: widget.content);      
   }
-
+  
   @override
   void dispose() {
     _controller.dispose();
@@ -36,73 +34,79 @@ class _ContentNoteSectionState extends State<ContentNoteSection> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          isNoteContentEditing = true;
+          _isNoteContentEditing = true;
           _focusNode.requestFocus();
         });
       },
-      child: ListView(
-        padding: EdgeInsets.zero,
-        shrinkWrap: true,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: isNoteContentEditing
-            ? SizedBox(
-              height: screenHeight * 0.47,
-              width: 100,
-              child: TextField(
-                controller: _controller,
-                focusNode: _focusNode,
-                onSubmitted: (value) {
-                  setState(() {
-                    isNoteContentEditing = false;
-                  });
-                },
-                maxLines: null,
-                minLines: 20,
-                onChanged: (content) {
-                  widget.updateContent(content);
-                },
-                style: const TextStyle(
-                  fontSize: 18, 
+      child: Stack(
+        children: <Widget>[ ListView(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: _isNoteContentEditing
+              ? SizedBox(
+                height: screenHeight * 0.47,
+                width: 100,
+                child: TextField(
+                  controller: _controller,
+                  focusNode: _focusNode,
+                  onSubmitted: (value) {
+                    setState(() {
+                      _isNoteContentEditing = false;
+                    });
+                  },
+                  maxLines: null,
+                  onChanged: (content) {
+                    widget.updateContent(content);
+                  },
+                  style: const TextStyle(
+                    fontSize: 18, 
+                  ),
+                  decoration: const InputDecoration(
+                    border: InputBorder.none
+                  ),
                 ),
-                decoration: const InputDecoration(
-                  border: InputBorder.none
+              )
+              : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 9),
+                child: SizedBox(
+                  height: screenHeight * 0.78,
+                  width: 100, 
+                  child: Text(
+                      _controller.text.isNotEmpty ? _controller.text : 'Not Alanı',
+                      style: _controller.text.isNotEmpty
+                      ? const TextStyle(
+                          fontSize: 18, 
+                        )
+                      : const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black45
+                      )
+                    ),
                 ),
               ),
             )
-            : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 9),
-              child: Text(
-                  _controller.text.isNotEmpty ? _controller.text : 'Not Alanı',
-                  style: _controller.text.isNotEmpty
-                  ? const TextStyle(
-                      fontSize: 18, 
-                    )
-                  : const TextStyle(
-                      fontSize: 18,
-                      color: Colors.black45
-                  )
-                ),
-            ),
+          ],
+        ),
+        _isNoteContentEditing 
+        ? Positioned(
+            bottom: 5,
+            right: 15,
+            child: Container(
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.black12,
+              ),
+              child: const InkWell(
+                child: Icon(Icons.done, size: 40,)),
+            )
           )
-        ],
-      )
-      // child: ListView(
-      //  shrinkWrap: true,
-      //   children: [
-      //     Padding(
-      //       padding: const EdgeInsets.symmetric(horizontal: 20),
-      //       child: Text(
-      //           'Bu birinci satır.\nBu ikinci satır.\nBu üçüncü satır.'
-      //         )
-      //     )
-      //   ],
-      // ),
-
-
-
-
+        : const SizedBox.shrink(),
+        
+      ])
     );
   
   }
