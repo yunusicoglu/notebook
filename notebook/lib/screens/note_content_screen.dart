@@ -7,12 +7,10 @@ import 'package:notebook/note_content_sections/content_top_section.dart';
 import './../services/firebase_services.dart';
 
 class NoteContentScreen extends StatefulWidget {
-
   final String noteId;
   final String noteTitle;
   final String noteContent;
   final Function(String id, String title, String content) updateNotes;
-
 
   const NoteContentScreen({
     super.key,
@@ -20,8 +18,7 @@ class NoteContentScreen extends StatefulWidget {
     required this.noteTitle,
     required this.noteContent,
     required this.updateNotes,
-
-    });
+  });
 
   @override
   State<NoteContentScreen> createState() => _NoteContentState();
@@ -49,15 +46,17 @@ class _NoteContentState extends State<NoteContentScreen> {
     widget.updateNotes(widget.noteId, _title, _content);
   }
 
-
-
   void updateTitle(String title) {
     setState(() {
       _title = title;
     });
   }
 
-
+  void updateContent(String content) {
+    setState(() {
+      _content = content;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +66,7 @@ class _NoteContentState extends State<NoteContentScreen> {
           ContentTopSection(saveAndExit: saveAndExit),
           const SizedBox(height: 10),
           ContentTitle(updateTitle: updateTitle, title: _title),
-          ContentNoteSection(),
+          ContentNoteSection(updateContent: updateContent, content: _content),
         ],
       ),
     );
