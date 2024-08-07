@@ -24,6 +24,7 @@ class _ContentNoteSectionState extends State<ContentNoteSection> {
   @override
   void dispose() {
     _contentcontroller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -41,22 +42,38 @@ class _ContentNoteSectionState extends State<ContentNoteSection> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: _isEditing
-              ? TextField(
-                  controller: _contentcontroller,
-                  focusNode: _focusNode,
-                  maxLines: null,
-                  expands: true,
-                  onSubmitted: (value) {
-                    setState(() {
-                      _isEditing = false;
-                    });
-                  },
-                  onChanged: (content) {
-                    widget.updateContent(content);
-                  },
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Notunuzu girin',
+              ? FocusScope(
+                  child: Focus(
+                    onFocusChange: (hasFocus) {
+                      if (!hasFocus) {
+                        setState(() {
+                          _isEditing = false;
+                        });
+                      }
+                    },
+                    child: TextField(
+                      controller: _contentcontroller,
+                      focusNode: _focusNode,
+                      maxLines: null,
+                      expands: true,
+                      onTap: () {
+                        setState(() {
+                          _isEditing = true;
+                        });
+                      },
+                      onSubmitted: (value) {
+                        setState(() {
+                          _isEditing = false;
+                        });
+                      },
+                      onChanged: (content) {
+                        widget.updateContent(content);
+                      },
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Notunuzu girin',
+                      ),
+                    ),
                   ),
                 )
               : Padding(
