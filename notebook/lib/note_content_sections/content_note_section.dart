@@ -89,7 +89,7 @@ class _ContentNoteSectionState extends State<ContentNoteSection> {
                                         fontSize: 20,
                                       )
                                     : const TextStyle(
-                                        fontSize: 22.4, color: Colors.black87)),
+                                        fontSize: 18, color: Colors.black45)),
                           ),
                         ),
                 )
