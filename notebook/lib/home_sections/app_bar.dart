@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notebook/services/firebase_services.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  final Function(String id, String title, String content) addNote; 
+  final Function(String id, String title, String content) addNote;
   const AppBarWidget({
     super.key,
     required this.addNote,
@@ -28,10 +28,14 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
           InkWell(
-            onTap: ()=> addNoteAndSendToHomeScreen(addNote),
+            onTap: () => addNoteAndSendToHomeScreen(addNote),
             highlightColor: Colors.black26,
             borderRadius: BorderRadius.circular(10),
-            child: const Icon(Icons.add, size: 45, color: Color.fromARGB(221, 61, 61, 61),),
+            child: const Icon(
+              Icons.add,
+              size: 45,
+              color: Color.fromARGB(221, 61, 61, 61),
+            ),
           )
         ],
       ),
@@ -43,8 +47,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(80.0);
 }
 
-
-void addNoteAndSendToHomeScreen( Function(String id, String title, String content) addNote ) async {
+void addNoteAndSendToHomeScreen(
+    Function(String id, String title, String content) addNote) async {
   FirebaseServices firebaseServices = FirebaseServices();
   Map<String, dynamic>? newNote = await firebaseServices.addNote();
 

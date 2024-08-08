@@ -10,7 +10,7 @@ class ContentTitle extends StatefulWidget {
     required this.onTitleChange,
     required this.title,
     required this.updateNote,
-    });
+  });
 
   @override
   State<ContentTitle> createState() => _ContentTitleState();
@@ -22,12 +22,11 @@ class _ContentTitleState extends State<ContentTitle> {
   final FocusNode _focusNode = FocusNode();
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     //degiskenin default halini tanimlarken hata vermemesi icin burada yapildi
-    _controller = TextEditingController(text: widget.title);       
+    _controller = TextEditingController(text: widget.title);
   }
-
 
   @override
   void dispose() {
@@ -35,7 +34,6 @@ class _ContentTitleState extends State<ContentTitle> {
     super.dispose();
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -50,48 +48,44 @@ class _ContentTitleState extends State<ContentTitle> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: _isEditing
-            ? TextField(
-              controller: _controller,
-              focusNode: _focusNode,
-              onSubmitted: (value) {
-                //veritabaninda guncelle
-                widget.updateNote();
+              ? TextField(
+                  controller: _controller,
+                  focusNode: _focusNode,
+                  onSubmitted: (value) {
+                    //veritabaninda guncelle
+                    widget.updateNote();
 
-                setState(() {
-                  _isEditing = false;
-                });
-              },
-              onChanged: (title) {
-                widget.onTitleChange(title);
-              },
-              style: const TextStyle(
-                fontSize: 26, 
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1,
-              ),
-              decoration: const InputDecoration(
-                border: InputBorder.none
-              ),
-            )
-            : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 9),
-              child: Text(
-                _controller.text.isNotEmpty ? _controller.text : 'Başlık',
-                
-                style: _controller.text.isNotEmpty
-                ? const TextStyle(
-                    fontSize: 26, 
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                  )
-                : const TextStyle(
+                    setState(() {
+                      _isEditing = false;
+                    });
+                  },
+                  onChanged: (title) {
+                    widget.onTitleChange(title);
+                  },
+                  style: const TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1,
-                    color: Colors.black45
-                  )
-              ),
-            ),
+                  ),
+                  decoration: const InputDecoration(border: InputBorder.none),
+                )
+              : Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 0, vertical: 9),
+                  child: Text(
+                      _controller.text.isNotEmpty ? _controller.text : 'Başlık',
+                      style: _controller.text.isNotEmpty
+                          ? const TextStyle(
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1,
+                            )
+                          : const TextStyle(
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1,
+                              color: Colors.black45)),
+                ),
         ),
       ),
     );

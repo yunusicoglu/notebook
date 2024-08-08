@@ -28,7 +28,6 @@ class _NoteContentState extends State<NoteContentScreen> {
   String _title = '';
   String _content = '';
 
-
   @override
   void initState() {
     super.initState();
@@ -65,10 +64,18 @@ class _NoteContentState extends State<NoteContentScreen> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          ContentTopSection(exit: _exit,),
+          ContentTopSection(
+            exit: _exit,
+          ),
           const SizedBox(height: 10),
-          ContentTitle(onTitleChange: onTitleChange, title: _title, updateNote:_updateNote),
-          ContentNoteSection(onContentChange: onContentChange, content: _content, updateNote: _updateNote),
+          ContentTitle(
+              onTitleChange: onTitleChange,
+              title: _title,
+              updateNote: _updateNote),
+          ContentNoteSection(
+              onContentChange: onContentChange,
+              content: _content,
+              updateNote: _updateNote),
         ],
       ),
     );
