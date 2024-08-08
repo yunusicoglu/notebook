@@ -62,6 +62,7 @@ class _NoteContentState extends State<NoteContentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey[50],
       body: Column(
         children: <Widget>[
           ContentTopSection(

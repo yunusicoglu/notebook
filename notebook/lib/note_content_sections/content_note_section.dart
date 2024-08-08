@@ -68,7 +68,7 @@ class _ContentNoteSectionState extends State<ContentNoteSection> {
                               widget.onContentChange(content);
                             },
                             style: const TextStyle(
-                              fontSize: 18,
+                              fontSize: 19.4,
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
@@ -86,10 +86,10 @@ class _ContentNoteSectionState extends State<ContentNoteSection> {
                                     : 'Not Alanı',
                                 style: _controller.text.isNotEmpty
                                     ? const TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 20,
                                       )
                                     : const TextStyle(
-                                        fontSize: 18, color: Colors.black45)),
+                                        fontSize: 22.4, color: Colors.black87)),
                           ),
                         ),
                 )
@@ -106,7 +106,7 @@ class _ContentNoteSectionState extends State<ContentNoteSection> {
                       ),
                       child: InkWell(
                           borderRadius: BorderRadius.circular(10),
-                          highlightColor: Colors.black12,
+                          highlightColor: Colors.black26,
                           onTap: () {
                             //veritabaninda guncelle
                             widget.updateNote();
