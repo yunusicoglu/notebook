@@ -38,22 +38,23 @@ class _NoteContentState extends State<NoteContentScreen> {
 
   void _exit() async {
     Navigator.pop(context);
+  }
 
+  void _updateNote() async {
     FirebaseServices firebaseServices = FirebaseServices();
     await firebaseServices.updateNote(widget.noteId, _title, _content);
 
     //Home Screen'deki not listesinin güncellenmesi için bu notun bilgilerini gönderiyorum.
     widget.updateNotes(widget.noteId, _title, _content);
-
   }
 
-  void updateTitle(String title) {
+  void onTitleChange(String title) {
     setState(() {
       _title = title;
     });
   }
 
-  void updateContent(String content) {
+  void onContentChange(String content) {
     setState(() {
       _content = content;
     });
@@ -66,8 +67,8 @@ class _NoteContentState extends State<NoteContentScreen> {
         children: <Widget>[
           ContentTopSection(exit: _exit,),
           const SizedBox(height: 10),
-          ContentTitle(updateTitle: updateTitle, title: _title),
-          ContentNoteSection(updateContent: updateContent, content: _content,),
+          ContentTitle(onTitleChange: onTitleChange, title: _title, updateNote:_updateNote),
+          ContentNoteSection(onContentChange: onContentChange, content: _content, updateNote: _updateNote),
         ],
       ),
     );
