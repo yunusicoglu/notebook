@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ContentTitle extends StatefulWidget {
-  final void Function(String) updateTitle;
+  final void Function(String) onTitleChange;
   final String? title;
+  final Function() updateNote;
+
   const ContentTitle({
     super.key,
-    required this.updateTitle,
-    required this.title
+    required this.onTitleChange,
+    required this.title,
+    required this.updateNote,
     });
 
   @override
@@ -51,12 +54,15 @@ class _ContentTitleState extends State<ContentTitle> {
               controller: _controller,
               focusNode: _focusNode,
               onSubmitted: (value) {
+                //veritabaninda guncelle
+                widget.updateNote();
+
                 setState(() {
                   _isEditing = false;
                 });
               },
               onChanged: (title) {
-                widget.updateTitle(title);
+                widget.onTitleChange(title);
               },
               style: const TextStyle(
                 fontSize: 26, 
