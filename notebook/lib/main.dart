@@ -17,10 +17,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: 'Ubuntu'),
-      debugShowCheckedModeBanner: false,
-      home: const HomeScreen()
-    );
+        theme: ThemeData(fontFamily: 'Ubuntu'),
+        debugShowCheckedModeBanner: false,
+        home: const HomeScreen());
   }
 }
-

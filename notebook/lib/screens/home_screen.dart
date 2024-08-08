@@ -30,10 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
       _notes = notes;
     });
   }
-    
-  //Not listesinin state'ini günceller 
+
+  //Not listesinin state'ini günceller
   //Note Content Screen'den geri gelindiğinde son görüntülenen notun bilgileri alınır ve liste güncellenir
-  void _updateNotes(String id, String title, String content){
+  void _updateNotes(String id, String title, String content) {
     setState(() {
       for (var note in _notes) {
         if (note['id'] == id) {
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  void _addNote(String id, String title, String content){
+  void _addNote(String id, String title, String content) {
     setState(() {
       _notes.insert(0, {
         'id': id,
@@ -64,22 +64,30 @@ class _HomeScreenState extends State<HomeScreen> {
         children: <Widget>[
           const SizedBox(height: 10),
           _notes.isNotEmpty
-            ? Column(
-                children: _notes.map((note){
-                  return Column(
-                    children: <Widget>[
-                      NoteCover(noteId: note['id'], noteTitle: note['title'], noteContent: note['content'], updateNotes: _updateNotes,),
-                      const SizedBox(height: 30),
-                    ],
-                  );
-                }).toList(),
-              )
-            : const Column(
-              children: <Widget>[
-                SizedBox(height: 300,),
-                Text('Not yok', style: TextStyle(fontSize: 23),),
-              ] 
-            )
+              ? Column(
+                  children: _notes.map((note) {
+                    return Column(
+                      children: <Widget>[
+                        NoteCover(
+                          noteId: note['id'],
+                          noteTitle: note['title'],
+                          noteContent: note['content'],
+                          updateNotes: _updateNotes,
+                        ),
+                        const SizedBox(height: 30),
+                      ],
+                    );
+                  }).toList(),
+                )
+              : const Column(children: <Widget>[
+                  SizedBox(
+                    height: 300,
+                  ),
+                  Text(
+                    'Not yok',
+                    style: TextStyle(fontSize: 23),
+                  ),
+                ])
         ],
       ),
     );

@@ -2,8 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-
 class FirebaseServices {
   final FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -18,11 +16,7 @@ class FirebaseServices {
       });
       print('Not bilgileri basariyla eklendi.');
       // return docRef.id;
-      return {
-        'id': docRef.id,
-        'title': '',
-        'content': ''
-      };
+      return {'id': docRef.id, 'title': '', 'content': ''};
     } catch (e) {
       print('Not eklenirken hata olustu: $e');
       return null;
@@ -34,7 +28,7 @@ class FirebaseServices {
 
     try {
       await notesCollection.doc(docId).update({
-        'title':title,
+        'title': title,
         'content': content,
         'updated_at': FieldValue.serverTimestamp(),
       });
@@ -82,9 +76,7 @@ class FirebaseServices {
       }
     } catch (e) {
       print('Dokuman alinamadi: $e');
-        return null;
+      return null;
     }
   }
-
-
 }
