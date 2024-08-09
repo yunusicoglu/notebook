@@ -52,12 +52,13 @@ class _NoteContentState extends State<NoteContentScreen> {
   }
 
   void _deleteNote() async {
+    Navigator.pop(context);
+    
     bool isSuccess = await firebaseServices.deleteNote(widget.noteId);
     if (isSuccess) {
       widget.deleteNote(widget.noteId);
     }
 
-    Navigator.pop(context);
   }
 
   void onTitleChange(String title) {
