@@ -11,6 +11,8 @@ class NoteContentScreen extends StatefulWidget {
   final String noteTitle;
   final String noteContent;
   final Function(String id, String title, String content) updateNotes;
+  final Function(String id) deleteNote;
+
 
   const NoteContentScreen({
     super.key,
@@ -18,6 +20,8 @@ class NoteContentScreen extends StatefulWidget {
     required this.noteTitle,
     required this.noteContent,
     required this.updateNotes,
+    required this.deleteNote,
+
   });
 
   @override
@@ -25,6 +29,7 @@ class NoteContentScreen extends StatefulWidget {
 }
 
 class _NoteContentState extends State<NoteContentScreen> {
+  FirebaseServices firebaseServices = FirebaseServices();
   String _title = '';
   String _content = '';
 
@@ -40,11 +45,19 @@ class _NoteContentState extends State<NoteContentScreen> {
   }
 
   void _updateNote() async {
-    FirebaseServices firebaseServices = FirebaseServices();
     await firebaseServices.updateNote(widget.noteId, _title, _content);
 
     //Home Screen'deki not listesinin güncellenmesi için bu notun bilgilerini gönderiyorum.
     widget.updateNotes(widget.noteId, _title, _content);
+  }
+
+  void _deleteNote() async {
+    bool isSuccess = await firebaseServices.deleteNote(widget.noteId);
+    if (isSuccess) {
+      widget.deleteNote(widget.noteId);
+    }
+
+    Navigator.pop(context);
   }
 
   void onTitleChange(String title) {
@@ -67,6 +80,7 @@ class _NoteContentState extends State<NoteContentScreen> {
         children: <Widget>[
           ContentTopSection(
             exit: _exit,
+            deleteNote: _deleteNote,
           ),
           const SizedBox(height: 10),
           ContentTitle(

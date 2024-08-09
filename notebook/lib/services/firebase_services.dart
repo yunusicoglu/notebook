@@ -14,12 +14,23 @@ class FirebaseServices {
         'content': '',
         'created_at': FieldValue.serverTimestamp(),
       });
-      print('Not bilgileri basariyla eklendi.');
       // return docRef.id;
       return {'id': docRef.id, 'title': '', 'content': ''};
     } catch (e) {
       print('Not eklenirken hata olustu: $e');
       return null;
+    }
+  }
+
+  Future<bool> deleteNote(String id) async {
+    CollectionReference notesCollection = db.collection('notes');
+
+    try {
+      await notesCollection.doc(id).delete();
+      return true;
+    } catch (e) {
+      print('Not silinirken hata: $e');
+      return false;
     }
   }
 
@@ -32,7 +43,6 @@ class FirebaseServices {
         'content': content,
         'updated_at': FieldValue.serverTimestamp(),
       });
-      print('Not bilgileri basariyla guncellendi.');
     } catch (e) {
       print('Not guncellenirken bir hata olustu: $e');
     }

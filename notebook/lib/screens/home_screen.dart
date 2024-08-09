@@ -44,6 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  //silinen notu ana menudeki listeden de kaldirir
+  void _deleteNote(id){
+    setState(() {
+      _notes.removeWhere((note) => note['id'] == id);
+    });
+  }
+
+  //eklenen notu ana menudeki listeye de ekler
   void _addNote(String id, String title, String content) {
     setState(() {
       _notes.insert(0, {
@@ -73,6 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           noteTitle: note['title'],
                           noteContent: note['content'],
                           updateNotes: _updateNotes,
+                          deleteNote: _deleteNote
                         ),
                         const SizedBox(height: 30),
                       ],

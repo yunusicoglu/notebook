@@ -6,6 +6,7 @@ class NoteCover extends StatelessWidget {
   final String noteTitle;
   final String noteContent;
   final Function(String id, String title, String content) updateNotes;
+  final Function(String id) deleteNote;
 
   const NoteCover({
     super.key,
@@ -13,6 +14,7 @@ class NoteCover extends StatelessWidget {
     required this.noteTitle,
     required this.noteContent,
     required this.updateNotes,
+    required this.deleteNote,
   });
 
   @override
@@ -23,7 +25,7 @@ class NoteCover extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: InkWell(
         onTap: () => goToNoteContentScreen(
-            context, noteId, noteTitle, noteContent, updateNotes),
+            context, noteId, noteTitle, noteContent, updateNotes, deleteNote),
         borderRadius: BorderRadius.circular(10),
         splashColor: Colors.transparent,
         highlightColor: const Color.fromARGB(54, 0, 0, 0),
@@ -66,7 +68,8 @@ class NoteCover extends StatelessWidget {
       String noteId,
       String noteTitle,
       String noteContent,
-      Function(String id, String title, String content) updateNotes) {
+      Function(String id, String title, String content) updateNotes,
+      Function(String id) deleteNote) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -74,6 +77,8 @@ class NoteCover extends StatelessWidget {
                 noteId: noteId,
                 noteTitle: noteTitle,
                 noteContent: noteContent,
-                updateNotes: updateNotes)));
+                updateNotes: updateNotes,
+                deleteNote: deleteNote
+                )));
   }
 }
