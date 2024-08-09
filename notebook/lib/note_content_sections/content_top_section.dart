@@ -37,8 +37,15 @@ class ContentTopSection extends StatelessWidget {
             onTap: deleteNote,
             borderRadius: BorderRadius.circular(7),
             child: Container(
-              padding: const EdgeInsets.all(5),
-              child: const Icon(Icons.delete, color: Colors.red,),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(71, 255, 185, 144),
+                borderRadius: BorderRadius.circular(10)
+              ),
+              padding: const EdgeInsets.all(7),
+              child: const Icon(
+                Icons.delete, 
+                color: Color.fromARGB(255, 255, 17, 1), 
+                size: 23,),
             ),
           )
         ],
