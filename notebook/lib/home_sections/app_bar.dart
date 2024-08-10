@@ -18,14 +18,9 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Row(
-            children: [
-              Text(
-                'Notlarım',
-                style: TextStyle(fontSize: 35),
-              ),
-              SizedBox(width: 15),
-            ],
+          const Text(
+            'Notlarım',
+            style: TextStyle(fontSize: 35),
           ),
           InkWell(
             onTap: () => addNoteAndSendToHomeScreen(addNote),
